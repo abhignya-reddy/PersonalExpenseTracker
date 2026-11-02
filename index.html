@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase JavaScript library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Personal Expense Tracker</h1>
+            <p>Manage your daily expenses easily!</p>
+        </header>
+
+        <!-- Authentication section -->
+        <section class="section" id="authSection">
+            <h2 id="authHeading">Login</h2>
+
+            <form id="authForm">
+                <label for="email">Email</label>
+                <input type="email" id="email" required
+                       placeholder="Enter your email">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" required
+                       placeholder="Enter your password">
+
+                <button type="submit" id="authButton">Login</button>
+            </form>
+
+            <p id="authMessage" role="status"></p>
+
+            <p id="authSwitch">
+                Don't have an account?
+                <button type="button" id="switchAuth">Sign up</button>
+            </p>
+        </section>
+
+        <!-- Expense tracker: visible after login -->
+        <div id="trackerSection" hidden>
+
+            <div class="user-bar">
+                <span id="userEmail"></span>
+                <button type="button" id="logoutButton">Logout</button>
+            </div>
+
+            <div class="summary-container">
+                <div class="summary-card">
+                    <h3>Total Expenses</h3>
+                    <p>₹<span id="dashboardTotal">0.00</span></p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>This Month</h3>
+                    <p>₹<span id="dashboardMonthly">0.00</span></p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Transactions</h3>
+                    <p><span id="transactionCount">0</span></p>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2>Add New Expense</h2>
+
+                <form id="expenseForm">
+                    <label for="expenseName">Expense Name</label>
+                    <input type="text" id="expenseName"
+                           placeholder="Enter expense name" required>
+
+                    <label for="amount">Amount (₹)</label>
+                    <input type="number" id="amount"
+                           placeholder="Enter amount"
+                           min="0.01" step="0.01" required>
+
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Education">Education</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+
+                    <button type="submit" id="expenseSubmit">
+                        Add Expense
+                    </button>
+                </form>
+            </section>
+
+            <section class="section">
+                <h2>Monthly Expense Summary</h2>
+
+                <label for="monthFilter">Select Month:</label>
+                <input type="month" id="monthFilter">
+
+                <h3 class="monthly-total">
+                    Monthly Total: ₹<span id="monthlyTotal">0.00</span>
+                </h3>
+            </section>
+
+            <section class="section">
+                <h2>Recent Expenses</h2>
+
+                <label for="categoryFilter">Filter by Category:</label>
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Education">Education</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Expense</th>
+                                <th>Amount (₹)</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseList"></tbody>
+                    </table>
+                </div>
+
+                <h3 class="total">
+                    Total Expenses: ₹<span id="total">0.00</span>
+                </h3>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>
